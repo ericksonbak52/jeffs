@@ -25,7 +25,7 @@ public class PlayerJump : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.Space))
             {
-                player.GetComponent<Rigidbody>().AddForce(0, jumpHeight, 0);
+                player.GetComponent<Rigidbody>().AddForce(0, jumpHeight * Time.deltaTime, 0);
             }
         }
     }
