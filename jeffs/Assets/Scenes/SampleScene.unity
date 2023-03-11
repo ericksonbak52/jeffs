@@ -401,7 +401,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 28299460}
   canJump: 0
-  jumpHeight: 10000
+  jumpHeight: 200
 --- !u!65 &920255979
 BoxCollider:
   m_ObjectHideFlags: 0
