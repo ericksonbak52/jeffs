@@ -9,14 +9,10 @@ public class PlayerJump : MonoBehaviour
     public bool canJump;
     public float jumpHeight;
 
-    
-
     void OnTriggerEnter(Collider other)
     {
         canJump = true;
     }
-
-    
 
     public void Update()
     { 
