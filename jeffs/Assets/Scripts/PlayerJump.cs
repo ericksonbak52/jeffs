@@ -9,16 +9,12 @@ public class PlayerJump : MonoBehaviour
     public bool canJump;
     public float jumpHeight;
 
-    
-
     void OnTriggerEnter(Collider other)
     {
         canJump = true;
     }
 
-    
-
-    public void Update()
+     public void Update()
     { 
         if (canJump)
         {
@@ -26,7 +22,6 @@ public class PlayerJump : MonoBehaviour
             {
                 player.GetComponent<Rigidbody>().AddForce(0, jumpHeight, 0);
                 canJump = false;
-                
             }
         }
     }
