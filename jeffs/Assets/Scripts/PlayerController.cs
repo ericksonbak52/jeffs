@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     public Rigidbody rb;
 
     public GameObject Cam;
+    public GameObject CartDetector;
 
     private float moveX = 0f;
     private float moveZ = 0f;
@@ -32,32 +33,35 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        //check z inputs
-        if (Input.GetKey(KeyCode.W))
+        if (!CartDetector.GetComponent<ShoppingCartDetector>().cartActive)
         {
-            moveZ = 1f;
-        }
-        else if (Input.GetKey(KeyCode.S))
-        {
-            moveZ = -1f;
-        }
-        else
-        {
-            moveZ = 0f;
-        }
+            //check z inputs
+            if (Input.GetKey(KeyCode.W))
+            {
+                moveZ = 1f;
+            }
+            else if (Input.GetKey(KeyCode.S))
+            {
+                moveZ = -1f;
+            }
+            else
+            {
+                moveZ = 0f;
+            }
 
-        //check x inputs
-        if (Input.GetKey(KeyCode.A))
-        {
-            moveX = -1f;
-        }
-        else if (Input.GetKey(KeyCode.D))
-        {
-            moveX = 1f;
-        }
-        else
-        {
-            moveX = 0f;
+            //check x inputs
+            if (Input.GetKey(KeyCode.A))
+            {
+                moveX = -1f;
+            }
+            else if (Input.GetKey(KeyCode.D))
+            {
+                moveX = 1f;
+            }
+            else
+            {
+                moveX = 0f;
+            }
         }
 
         //rotate cam horizontally
@@ -74,34 +78,37 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (rb.velocity.x < topSpeed && rb.velocity.x > -topSpeed)
+        if (!CartDetector.GetComponent<ShoppingCartDetector>().cartActive)
         {
-            rb.AddForce(moveX * Time.deltaTime * xSpeed * transform.right);
-        }
+            if (rb.velocity.x < topSpeed && rb.velocity.x > -topSpeed)
+            {
+                rb.AddForce(moveX * Time.deltaTime * xSpeed * transform.right);
+            }
 
-        if (rb.velocity.z < topSpeed && rb.velocity.z > -topSpeed)
-        {
-            rb.AddForce(moveZ * Time.deltaTime * zSpeed * transform.forward);
-        }
+            if (rb.velocity.z < topSpeed && rb.velocity.z > -topSpeed)
+            {
+                rb.AddForce(moveZ * Time.deltaTime * zSpeed * transform.forward);
+            }
 
-        if (rb.velocity.x > topSpeed)
-        {
-            rb.velocity = new Vector3(topSpeed, rb.velocity.y, rb.velocity.z);
-        }
+            if (rb.velocity.x > topSpeed)
+            {
+                rb.velocity = new Vector3(topSpeed, rb.velocity.y, rb.velocity.z);
+            }
 
-        if (rb.velocity.x < -topSpeed)
-        {
-            rb.velocity = new Vector3(-topSpeed, rb.velocity.y, rb.velocity.z);
-        }
+            if (rb.velocity.x < -topSpeed)
+            {
+                rb.velocity = new Vector3(-topSpeed, rb.velocity.y, rb.velocity.z);
+            }
 
-        if (rb.velocity.z > topSpeed)
-        {
-            rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, topSpeed);
-        }
+            if (rb.velocity.z > topSpeed)
+            {
+                rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, topSpeed);
+            }
 
-        if (rb.velocity.z < -topSpeed)
-        {
-            rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, -topSpeed);
+            if (rb.velocity.z < -topSpeed)
+            {
+                rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y, -topSpeed);
+            }
         }
     }
 }
